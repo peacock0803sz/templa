@@ -4,6 +4,10 @@
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ flake-parts, ... }:
@@ -15,6 +19,7 @@
         #   2. Add foo as a parameter to the outputs function
         #   3. Add here: foo.flakeModule
 
+        inputs.git-hooks.flakeModule
       ];
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
       perSystem = { config, self', inputs', pkgs, system, ... }: {
@@ -22,8 +27,14 @@
         # module parameters provide easy access to attributes of the same
         # system.
 
+        pre-commit.settings.hooks = {
+          golangci-lint.enable = true;
+          gofumpt.enable = true;
+        };
+
         # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
         devShells.default = pkgs.mkShell {
+          inputsFrom = [ config.pre-commit.devShell ];
           packages = with pkgs; [
             go
             golangci-lint
