@@ -1,0 +1,24 @@
+[project]
+name = "templa"
+version = "0.0.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "typer>=0.24.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.15.8",
+    "ty>=0.0.26",
+]
+
+[project.scripts]
+templa = "templa.main:app"
+
+[tool.setuptools.packages.find]
+include = ["templa"]
+
+[tool.uv]
+package = true
