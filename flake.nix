@@ -29,15 +29,23 @@
           ];
         };
 
-        # templates = {
-        #   default.path = ./_common;
-        # };
       };
       flake = {
         # The usual flake attributes can be defined here, including system-
         # agnostic ones like nixosModule and system-enumerating ones, although
         # those are more easily expressed in perSystem.
 
+        templates = let
+          readDirs = dir:
+            let entries = builtins.readDir dir; in
+            builtins.filter (n: entries.${n} == "directory") (builtins.attrNames entries);
+
+          toTemplate = name: { inherit name; value.path = ./templates + "/${name}"; };
+        in
+          (if builtins.pathExists ./templates
+           then builtins.listToAttrs (map toTemplate (readDirs ./templates))
+           else { })
+          // { default.path = ./common; };
       };
     };
 }
