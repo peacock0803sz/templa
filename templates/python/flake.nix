@@ -28,7 +28,12 @@
         # system.
 
         pre-commit.settings.hooks = {
-          ruff-check.enable = true;
+          ruff-check = {
+            enable = true;
+            entry = ".venv/bin/ruff check";
+            language = "system";
+            types = [ "python" ];
+          };
           ruff-format.enable = true;
           ty = {
             enable = true;
