@@ -8,7 +8,7 @@ defaults:
 
 jobs:
   update-nix:
-    runs-on: macos-15
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     env:
