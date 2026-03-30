@@ -17,6 +17,12 @@ dev = [
 [project.scripts]
 templa = "templa.main:app"
 
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "TID251"]
+
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"__future__.annotations" = {msg = "Python 3.14+ uses PEP 649 for deferred evaluation of annotations. Do not use PEP 563."}
+
 [tool.setuptools.packages.find]
 include = ["templa"]
 
