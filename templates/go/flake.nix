@@ -29,7 +29,11 @@
 
         pre-commit.settings.hooks = {
           golangci-lint.enable = true;
-          gofumpt.enable = true;
+          gofumpt = {
+            enable = true;
+            entry = "${pkgs.gofumpt}/bin/gofumpt -w";
+            types = [ "go" ];
+          };
         };
 
         # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
