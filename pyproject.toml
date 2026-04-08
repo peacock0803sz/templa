@@ -27,4 +27,5 @@ select = ["E", "F", "I", "UP", "TID251"]
 include = ["templa"]
 
 [tool.uv]
+exclude-newer = "P3D"
 package = true
