@@ -11,7 +11,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "ruff>=0.15.17",
-    "ty>=0.0.43",
+    "ty>=0.0.48",
 ]
 
 [project.scripts]
