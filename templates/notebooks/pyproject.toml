@@ -3,7 +3,7 @@ name = "templa-notebook"
 version = "0.1.0"
 description = ""
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.14.7"
 dependencies = [
     "jupyterlab>=4.5.6",
     "pandas>=3.0.5",
